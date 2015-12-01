@@ -1,0 +1,20 @@
+ <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <td style="width:15%">Id</td>
+        <td style="width:55%">Name</td>
+        <td style="width:30%">Status</td>
+    </tr>
+    </thead>
+    
+    <tbody>
+    <tr ng-repeat="p in persons | filter:fName | orderBy:'name'" ng-if="$index<8" class="inputXX">
+        <td editable-text="p.id" buttons="no" e-style="width: 45px"> {{ p.id }}</td>
+        <td editable-text="p.name" buttons="no"> {{ p.name }}</td>
+        <td editable-select="p.sid" buttons="no"
+            e-ng-options="s.sid as s.txt for s in statuses">
+            {{ statusOfSid(p.sid) }}</td>
+    </tr>
+    </tbody>
+    
+</table>
