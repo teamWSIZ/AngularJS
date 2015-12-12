@@ -1,0 +1,68 @@
+
+  <!--Problem: lista "persons", każdy to {id, name, statusid}
+      Z listy wybieramy "sperson", i <select> ma dawać możliwość wyboru "statusid" dla niej, tak,
+      by na koniec sperson miał wybrane statusid; <select> ma pokazywać status.Label, a wybierać
+      status.statusid
+      -->
+  <!--Cel:  -->
+  <!--<select ng-model="selectedp.statusid ">-->
+      <!--<option value="0">Status 0</option>-->
+      <!--<option value="1">Status 1</option>-->
+      <!--<option value="2">Status 2</option>-->
+  <!--</select>-->
+
+  <!--Jest OK; default dobrze ustawiony; statuses = [0,1,2]; wybiera int-->
+  <!--<select ng-model="m.sperson.statusid"-->
+          <!--ng-options="sel for sel in statuses">-->
+  <!--</select>-->
+
+  <select ng-model="m.sperson.statusid"
+          ng-options="sel.statusid as sel.Label for sel in statObj">
+  </select>
+
+  <!--Jest OK; default dobrze ustawiony; cities = [{},{},{}]; wybiera obiekt-->
+  <select ng-model="m.city" ng-options="sel as sel.Title for sel in cities track by sel.ID">
+  </select>
+  
+  <script>
+  
+    $scope.loadPersons = function () {
+        var url = 'http://10.10.10.10:8080/REST/api/allpersons';
+        $http.get(url).success(
+            function (data) {
+                $scope.persons = data.result;
+                $scope.xxx = 'success';
+                if ($scope.persons.length>0) {
+                    $scope.m.sperson = $scope.persons[0];
+                }
+            }
+        );
+    };
+
+    $scope.selectPerson = function (s) {
+        $scope.m.sperson = s;
+    };
+
+    $scope.cities = [
+        {ID: '0', Title: 'Chicago'},
+        {ID: '1', Title: 'New York'},
+        {ID: '2', Title: 'Washington'}
+    ];
+
+    //!! Właściwa konstrukcja; kluczowe: tam sa int 0, nie string '0'
+    $scope.statObj = [
+        {statusid: 0, Label: 'Nieobecny'},
+        {statusid: 1, Label: 'Aktywny'},
+        {statusid: 2, Label: 'Dormant'}
+    ];
+
+    $scope.statuses = [0, 1, 2];
+
+
+
+    $scope.m = {
+        city : $scope.cities[0],
+        sperson : {}
+    };
+  
+  </script>
