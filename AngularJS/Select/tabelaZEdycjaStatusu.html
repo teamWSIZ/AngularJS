@@ -1,0 +1,29 @@
+<table class="table table-striped table-condensed">
+    <thead>
+    <tr>
+        <td> Id</td><td>Name</td><td>Status</td>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr ng-repeat="p in persons" ng-if="$index<10">
+        <td> {{ p.id }}</td>
+        <td> <a href="#" ng-click="selectPerson(p)"> {{p.name}}</a> </td>
+        <td>
+            <!--{{p.statusid}}-->
+            <select ng-model="p.statusid"
+                    ng-options="sel.statusid as sel.Label for sel in statObj">
+            </select>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+//"persons" array of {id, name, statusid}
+ $scope.statObj = [
+      {statusid: 0, Label: 'Nieobecny'},
+      {statusid: 1, Label: 'Aktywny'},
+      {statusid: 2, Label: 'Dormant'}
+  ];
+</script>
