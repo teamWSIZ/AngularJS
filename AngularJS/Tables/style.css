@@ -1,0 +1,30 @@
+ /*Empty CSS file for your own CSS*/
+
+
+.myBox {
+    border: 1px solid;
+    border-radius: 5px;
+    padding-top: 5px;
+}
+
+
+.lineExample {
+    display: block;
+    min-height: 75px;
+    background-color: #c7ddef;
+    padding-right: 1px;
+}
+
+
+.inputXX {
+    height: 35px;
+    line-height: 35px;
+}
+
+.fixedEditWidth {
+    width: 120px;
+}
+
+.aaa {
+    width: 30px;
+}
