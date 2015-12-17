@@ -1,0 +1,25 @@
+
+<!-- Rzędy tabeli, których kolor zależy od stanu obiektów-->
+
+                
+<table class="table table-striped table-condensed">
+  <thead>
+  <tr>
+      <td> Id</td><td>CatId</td><td>File</td><td></td>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <tr ng-repeat="e in engines"
+      ng-click="selectEngine(e)"
+      ng-class="{ success : e.isselected, default : !e.isselected}">
+      <td> {{ e.engineid }}</td>
+      <td> {{ e.catid }}</td>
+      <td> {{ e.filename }}</td>
+      <td> <span class="glyphicon glyphicon-play-circle"
+                 aria-hidden="true" ng-click="useEngine(e)"></span></td>
+  </tr>
+  
+  </tbody>
+</table>
