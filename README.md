@@ -1,4 +1,4 @@
-# Technologie front-endu web-owego
+# AngularJS
 Template-y do technologii webowych:
 - javascript
 - css/botstrap
