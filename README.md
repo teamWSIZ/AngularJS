@@ -1,4 +1,4 @@
-# WebView
+# Technologie front-endu web-owego
 Template-y do technologii webowych:
 - javascript
 - css/botstrap
