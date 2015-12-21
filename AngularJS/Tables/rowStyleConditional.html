@@ -13,7 +13,9 @@
 
   <tr ng-repeat="e in engines"
       ng-click="selectEngine(e)"
-      ng-class="{ success : e.isselected, default : !e.isselected}">
+      ng-class="(e.isSelected ? 'success' : 'default')">
+      <!--      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+      <!-- zamiast własności może być też warunek, np. x.sel==y.sel   -->
       <td> {{ e.engineid }}</td>
       <td> {{ e.catid }}</td>
       <td> {{ e.filename }}</td>
