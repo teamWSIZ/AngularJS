@@ -1,0 +1,59 @@
+
+<!-- Zwykły submit -->
+<div class="boxed" ng-if="false">
+<form method="POST" enctype="multipart/form-data"
+      action="http://localhost:8080/ET/upload">
+    Engine name:    <input type="text" name="namex">
+    File to upload: <input type="file" name="file">
+    <input type="submit" value="Upload engine">
+</form>
+</div>
+
+<!-- Wersja angularjs -->
+<div class="boxed" ng-if="M.upEn">
+    Engine name: <input ng-model="M.nFile" style="width:30%">
+    <input type="file" id="file_xx" name="file"/>
+    <button ng-click="addUp()">Add</button>
+</div>
+
+------------------------------------------------
+//.js
+ $scope.addUp = function(){
+        var f = document.getElementById('file_xx').files[0];
+        console.log(f);
+        var fd = new FormData();
+        fd.append('file', f);
+        fd.append('namex', $scope.M.nFile);
+        $http.post('http://localhost:8080/ET/upload', fd, {
+            //transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).success(function (data) {
+        });
+    };
+    
+--------------------------------------------------
+//.java / spring
+@RequestMapping(value="/upload", method= RequestMethod.POST)
+  public @ResponseBody Rest handleFileUpload(
+              @RequestParam("namex") String name,
+              @RequestParam("file") MultipartFile file){
+      String path = "/Files/";
+      String fname = path + name;
+      Rest response = new Rest();
+      if (!file.isEmpty()) {
+          try {
+              byte[] bytes = file.getBytes();
+              BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(
+                      new File(fname)));
+              stream.write(bytes);
+              stream.close();
+              response.setResult("You successfully uploaded " + name + "!");
+          } catch (Exception e) {
+              response.setResult("You failed to upload " + name + " => " + e.getMessage());
+          }
+      } else {
+          response.setResult("You failed to upload " + name + " because the file was empty.");
+      }
+      //result must be of json type (object); no basic string allowed [else: angular error]
+      return response;
+  }
