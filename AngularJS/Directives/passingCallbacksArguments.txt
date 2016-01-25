@@ -1,0 +1,29 @@
+### Usage in app:
+<new-channel-modal channel="M.chzero" savefunction="ctrlClickFunction(temp)"></new-channel-modal>
+
+### Controller:
+$scope.ctrlClickFunction = function(ch) {
+  console.log('Click function of the controller executed...' + ch.name + ':' + ch.pass);
+}
+  
+### Directive:
+.directive('newChannelModal', function () {
+      return {
+          restrict: 'E',
+          scope: {
+              channel:  '=',
+              //passing callback function, taking one argument, called 'temp'
+              savefunction: '&'
+          },
+          link: function (scope, element, attrs) {
+            //locally defined functions...
+          },
+          templateUrl: 'partials/newChannelModal.html'
+      };
+  })
+
+### Template:
+<button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="savefunction({temp : channel})">Dodaj</button>
+
+ 
+ 
