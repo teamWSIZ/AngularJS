@@ -1,0 +1,38 @@
+
+Angular service:
+
+ wynikSRV.submitWynik = function (examHash, wynik) {
+            var setOfParams = {
+                hash: examHash,
+                album: wynik.album,
+                nazwisko: wynik.nazwisko,
+                imie: wynik.imie,
+            };
+
+            return $http({
+                url: rootUrl + 'wynik/submit',
+                method: 'POST',
+                params: setOfParams,
+                data: {alpha: wynik.docu, beta:'hash'}
+            });
+        };
+        
+Spring controller:
+@RequestMapping(value = {"/wynik/submit"})
+    @ResponseBody
+    public Rest submitWynik(@RequestParam(value = "hash") String hash,
+                            @RequestParam(value = "album") String album,
+                            @RequestParam(value = "nazwisko") String nazwisko,
+                            @RequestParam(value = "imie", defaultValue = "") String imie,
+                            @RequestBody Tes docu
+                            ) {
+        Exam e = examRe.findByHash(hash);
+        if (e==null) return new Rest("Nie ma egzaminu z tym hash-em.");
+        Wynik w = new Wynik(album, nazwisko, imie, docu.alpha, e.getEid());
+        
+  //where:
+  @Data
+public class Tes {
+    String alpha;
+    String beta;
+}
