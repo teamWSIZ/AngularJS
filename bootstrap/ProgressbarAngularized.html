@@ -1,0 +1,26 @@
+<tr ng-repeat="an in wyniki">
+    <td> {{an.pytanie}} </td>
+    <td>
+        <div class="progress">
+
+            <div class="progress-bar progress-bar-info" role="progressbar"
+                 ng-style="{'width' : an.yesVotes + '%'}"
+                 style="min-width: 10%"
+                 title="{{an.yesText}}">
+                <span >
+                    Tak : {{an.yesVotes}}
+                </span>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-alert" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                 ng-style="{'width' : an.noVotes + '%'}"
+                 style="min-width: 10%"
+                 title="{{an.noText}}">
+            <span >
+                 Nie : {{an.noVotes}}
+            </span>
+            </div>
+        </div>
+    </td>
+</tr>
